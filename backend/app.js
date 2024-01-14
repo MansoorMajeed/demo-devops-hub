@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 require('dotenv').config();
 
 const authRoutes = require('./authRoutes');
+const postsRoutes = require('./postsRoutes')
 
 
 const app = express();
@@ -28,6 +29,7 @@ db.getConnection((err, connection) => {
 // Routes would go here
 
 app.use('/api/auth', authRoutes);
+app.use('/api/posts', postsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

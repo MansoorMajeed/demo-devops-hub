@@ -97,3 +97,4 @@ For the demo purposes we will create a new test database and user
 ```bash
 ./backend/scripts/init-dev-db.sh
 ```
+

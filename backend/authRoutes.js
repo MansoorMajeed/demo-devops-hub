@@ -18,8 +18,8 @@ router.post('/signup', async (req, res) => {
       if (error) {
         return res.status(500).send('Error in saving');
       }
-
-      const token = jwt.sign({ username: username }, process.env.JWT_SECRET);
+      const userId = results.insertId;
+      const token = jwt.sign({ id: userId }, process.env.JWT_SECRET);
       res.status(201).send({ token });
     });
   });
@@ -34,7 +34,8 @@ router.post('/signin', async (req, res) => {
       return res.status(400).send('Username or password is incorrect');
     }
 
-    const token = jwt.sign({ username: username }, process.env.JWT_SECRET);
+    const user = results[0];
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET); // Include the user's ID in the token
     res.status(200).send({ token });
   });
 });
