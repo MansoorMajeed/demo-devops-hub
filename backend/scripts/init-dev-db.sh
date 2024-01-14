@@ -20,11 +20,13 @@ sudo mysql -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
 sudo mysql -e "FLUSH PRIVILEGES;"
 echo "Created user: $DB_USER and granted privileges"
 
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+
 # Update .env File
-echo "MYSQL_HOST=localhost" > ../.env
-echo "MYSQL_USER=$DB_USER" >> ../.env
-echo "MYSQL_PASSWORD=$DB_PASS" >> ../.env
-echo "MYSQL_DATABASE=$DB_NAME" >> ../.env
-echo "JWT_SECRET=$(openssl rand -base64 32)" >> ../.env
+echo "MYSQL_HOST=localhost" > $SCRIPT_DIR/../.env
+echo "MYSQL_USER=$DB_USER" >> $SCRIPT_DIR/../.env
+echo "MYSQL_PASSWORD=$DB_PASS" >> $SCRIPT_DIR/../.env
+echo "MYSQL_DATABASE=$DB_NAME" >> $SCRIPT_DIR/../.env
+echo "JWT_SECRET=$(openssl rand -base64 32)" >> $SCRIPT_DIR/../.env
 
 echo "Created the .env file"
